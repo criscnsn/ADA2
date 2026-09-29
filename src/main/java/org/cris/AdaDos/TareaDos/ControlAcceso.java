@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class ControlAcceso {
-    private String usuariosEncriptados = "/home/cristopher/Cuarto_Semestre/DisenoDeSoftware/ADA2/ArchivosCSV/tabla_usuarios_encriptados.csv";
+    private String usuariosEncriptados = "ArchivosCSV/tabla_usuarios_encriptados.csv";
 
     public boolean login() {
         Scanner scanner = new Scanner(System.in);

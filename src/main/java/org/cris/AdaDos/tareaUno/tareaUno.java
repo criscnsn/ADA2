@@ -35,8 +35,8 @@ public class tareaUno {
     }
 
     // /***************MIRANDA MODIFICA LA RUTA DONDE LO VAYAS A ALMACENAR*******************************************************/
-    private String rutaEntrada = "/home/cristopher/Cuarto_Semestre/DisenoDeSoftware/ADA2/ArchivosCSV/tabla_alumnos.csv";
-    private String rutaSalida = "/home/cristopher/Cuarto_Semestre/DisenoDeSoftware/ADA2/ArchivosCSV/calificaciones_alumnos.csv";
+    private String rutaEntrada = "/ArchivosCSV/tabla_alumnos.csv";
+    private String rutaSalida = "/ArchivosCSV/calificaciones_alumnos.csv";
     private List<Alumno> alumnos = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
