@@ -35,8 +35,7 @@ public class GeneradorPDF {
                 String nombreCompleto = al.getNombres() + " " + al.getPrimerApellido() + " " + al.getSegundoApellido();
                 agregarCelda(tabla, nombreCompleto, false);
 
-                String nota = (al.getCalificacion() == null || al.getCalificacion().isEmpty()) ? "S/C" : al.getCalificacion();
-                agregarCelda(tabla, nota, false);
+                agregarCelda(tabla, al.getCalificacionFormateada(), false);
             }
 
             documento.add(tabla);
