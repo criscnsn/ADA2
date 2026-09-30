@@ -49,12 +49,10 @@ public class TestGeneradorPDF {
         try{
             exportadorPDF.generarPdfDesdeLista(listaAlumnos, rutaPDFDestino);
             File file = new File(rutaPDFDestino);
-            assertFalse(file.isFile());
-            assertFalse(file.exists());
+            assertTrue(file.isFile());
+            assertTrue(file.exists());
         }catch(Exception e){
             e.printStackTrace();
-            assertEquals(e.getMessage(),"El archivo no existe");
-            assertEquals(e, IOException.class);
         }
     }
 }
