@@ -177,8 +177,7 @@ public class CapturaController {
         fileChooser.setTitle("Seleccionar lista de alumnos");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos CSV", "*.csv"));
 
-        Stage stage = (Stage) btnCargarArchivo.getScene().getWindow();
-        File file = fileChooser.showOpenDialog(stage);
+        File file = fileChooser.showOpenDialog(btnCargarArchivo.getScene().getWindow());
 
         if (file != null) {
             procesarArchivo(file);

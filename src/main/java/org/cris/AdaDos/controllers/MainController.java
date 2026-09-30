@@ -23,7 +23,7 @@ public class MainController {
     @FXML private PasswordField txtContrasenia;
     @FXML private Label lblMensaje;
 
-    private final String usuariosEncriptados = "/home/cristopher/Cuarto_Semestre/DisenoDeSoftware/ADA2/ArchivosCSV/tabla_usuarios_encriptados.csv";
+    private final String usuariosEncriptados = "ArchivosCSV/tabla_usuarios_encriptados.csv";
 
     private double xOffset = 0;
     private double yOffset = 0;
