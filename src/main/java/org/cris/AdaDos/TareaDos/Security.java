@@ -43,8 +43,8 @@ public class Security {
     /* EJECUTAR SOLO PARA GENERAR EL PRIMER CSV o AGREGAR NUEVOS USUARIOS ***************************/
     public static void main(String[] args) {
         int usrRgstrd = 0;
-        String archivoEntrada = "/home/cristopher/Cuarto_Semestre/DisenoDeSoftware/ADA2/ArchivosCSV/tabla_usuarios.csv";
-        String archivoSalida = "/home/cristopher/Cuarto_Semestre/DisenoDeSoftware/ADA2/ArchivosCSV/tabla_usuarios_encriptados.csv";
+        String archivoEntrada = "ArchivosCSV/tabla_usuarios.csv";
+        String archivoSalida = "ArchivosCSV/tabla_usuarios_encriptados.csv";
 
         System.out.println("ENCRIPTACIÓN DE USUARIOS");
         try (

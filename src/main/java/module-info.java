@@ -19,4 +19,8 @@ module org.cris.AdaDos {
 
     // Exportar el paquete principal para que sea visible
     exports org.cris.AdaDos;
+    exports org.cris.AdaDos.TareaDos;
+    exports org.cris.AdaDos.models;
+    exports org.cris.AdaDos.utils;
+    exports org.cris.AdaDos.TareaTres;
 }
