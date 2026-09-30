@@ -16,7 +16,7 @@ directamente hice que se tengan que ingresar todos los datos en la V1
 public class tareaUno {
 
     //ALUMNOS (Define caracteristicas)******************
-    private static class Alumno {
+    public static class Alumno {
         String matricula, primerApellido, segundoApellido, nombres;
         Integer calificacion;
         public Alumno(String matricula, String primerApellido, String segundoApellido, String nombres) {
@@ -32,87 +32,57 @@ public class tareaUno {
         public String getMatricula() {
             return matricula;
         }
+        public String getCalificacionFormateada() {
+            if (calificacion == null) {
+                return "S/C";
+            }
+            return String.valueOf(calificacion);
+        }
     }
 
     // /***************MIRANDA MODIFICA LA RUTA DONDE LO VAYAS A ALMACENAR*******************************************************/
-    private String rutaEntrada = "/home/cristopher/Cuarto_Semestre/DisenoDeSoftware/ADA2/ArchivosCSV/tabla_alumnos.csv";
-    private String rutaSalida = "/home/cristopher/Cuarto_Semestre/DisenoDeSoftware/ADA2/ArchivosCSV/calificaciones_alumnos.csv";
+    private String rutaEntrada = "ArchivosCSV/tabla_alumnos.csv";
+    private String rutaSalida = "ArchivosCSV/calificaciones_alumnos.csv";
     private List<Alumno> alumnos = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
     public void generacionCalificaciones() {
-        //Seleccionar archivo
-        System.out.println("Ruta actual: " + rutaEntrada);
-        System.out.print("Presione Enter para usarla o ingrese una nueva ruta:");
-        String nuevaRuta = scanner.nextLine();
-        if (!nuevaRuta.isEmpty()){
-            rutaEntrada = nuevaRuta;
-        }
-        //*************+VALIDADOR ARCHIVO***********
-        if (!rutaEntrada.endsWith(".csv")) {
-            System.err.println("Error: El archivo debe ser .csv");
-            return;
-        }
-        /******NO BORRAR!!!!!!!!*******/
-        if (!cargarDatos()){
-            return;
-        }
-        //***********Captura de calificaciones******
-        System.out.println("CAPTURA DE CALIFICACIONES (Disenio de Sofatware)");
-        for (Alumno alumno : alumnos) {
-            boolean calificacionValida = false;
-            while (!calificacionValida) {
-                System.out.print("Ingresa la calificación de " + alumno.getNombreAlumno() + " (" + alumno.getMatricula() + "): ");
-
-                String entrada = scanner.nextLine();
-
-                if (entrada.isEmpty()) {
-                    alumno.calificacion = null;
-                    calificacionValida = true;
-                } else {
-                    try {
-                        int calificacionTemp = Integer.parseInt(entrada);
-                        if (calificacionTemp >= 1 && calificacionTemp <= 100) {
-                            alumno.calificacion = calificacionTemp;
-                            calificacionValida = true;
-                        } else {
-                            System.out.println("La calificación debe ser entre 1 y 100.");
-                        }
-                    } catch (NumberFormatException e) {
-                        System.out.println("Debes ingresar un número entero o presionar enter.");
-                    }
-                }
-            }
-        }
-        //******Confirmacion de salida****** PDF CSV O NADOTA
-        System.out.print("\nIngrese 1 si quiere generar el archivo CSV o 2 si desea generar el PDF: ");
-        try {
-            int opcion = scanner.nextInt();
-            switch (opcion) {
-                case 1:
-                    generarArchivoSalida(rutaSalida, false);
-                    break;
-                case 2:
-                    String rutaTemporal = rutaSalida.replace(".csv", "_temp.csv");
-                    String rutaFinalPDF = rutaSalida.replace(".csv", ".pdf");
-                    generarArchivoSalida(rutaTemporal, true);
-
-                    GeneradorPDF generador = new GeneradorPDF();
-                    generador.convertirCsvAPdf(rutaTemporal, rutaFinalPDF);
-
-                    new File(rutaTemporal).delete();
-                    break;
-                default:
-                    System.out.println("Opcion no valida.");
-            }
-        }
-        catch (InputMismatchException e) {
-            System.out.println("Debe ingresar un número entero.");
-            scanner.nextLine();
-        }
+        new CapturadorDeCalificaciones(this).ejecutar();
     }
 
-    private boolean cargarDatos() {
+    public String getRutaEntrada() {
+        return rutaEntrada;
+    }
+
+    public void setRutaEntrada(String rutaEntrada) {
+        this.rutaEntrada = rutaEntrada;
+    }
+
+    public String getRutaSalida() {
+        return rutaSalida;
+    }
+
+    public void setRutaSalida(String rutaSalida) {
+        this.rutaSalida = rutaSalida;
+    }
+
+    public List<Alumno> getAlumnos() {
+        return alumnos;
+    }
+
+    public void setAlumnos(List<Alumno> alumnos) {
+        this.alumnos = alumnos;
+    }
+
+    public Scanner getScanner() {
+        return scanner;
+    }
+
+    public void setScanner(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
+    public boolean cargarDatos() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(rutaEntrada), StandardCharsets.UTF_8))) {
             br.readLine();
             String linea;
@@ -146,14 +116,7 @@ public class tareaUno {
                 pw.println("Matricula,Nombre Asignatura,Calificacion");
 
                 for (Alumno alumno : alumnos) {
-                    String notaTexto;
-
-                    if (alumno.calificacion == null) {
-                        notaTexto = "S/C";
-                    } else {
-                        notaTexto = String.valueOf(alumno.calificacion);
-                    }
-                    pw.println(alumno.getMatricula() + ",Disenio de Software," + notaTexto);
+                    pw.println(alumno.getMatricula() + ",Disenio de Software," + alumno.getCalificacionFormateada());
                 }
                 System.out.println("Archivo generado en: " + rutaDestino);
 
@@ -161,5 +124,12 @@ public class tareaUno {
                 System.err.println("Error: " + e.getMessage());
             }
         }
+    }
+
+    public static void main(String[] args) {
+        tareaUno tarea = new tareaUno();
+        tarea.cargarDatos();
+        tarea.generacionCalificaciones();
+        tarea.generarArchivoSalida("rutaSalida.txt", true);
     }
 }

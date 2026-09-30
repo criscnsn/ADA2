@@ -16,17 +16,8 @@ public class ExportadorCSV {
 
             // 2. Escribir Datos
             for (Alumno alumno : listaAlumnos) {
-                String notaTexto;
-
-                // Validamos si está vacío o nulo
-                if (alumno.getCalificacion() == null || alumno.getCalificacion().trim().isEmpty()) {
-                    notaTexto = "S/C"; // Sin Calificación
-                } else {
-                    notaTexto = alumno.getCalificacion();
-                }
-
                 // Formato: Matricula,Materia,Nota
-                pw.println(alumno.getMatricula() + ",Disenio de Software," + notaTexto);
+                pw.println(alumno.getMatricula() + ",Disenio de Software," + alumno.getCalificacionFormateada());
             }
         }
     }

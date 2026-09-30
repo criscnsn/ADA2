@@ -41,6 +41,13 @@ public class Alumno {
     public void setCalificacion(String calificacion) { this.calificacion.set(calificacion); }
     public StringProperty calificacionProperty() { return calificacion; }
 
+    public String getCalificacionFormateada() {
+        if (calificacion.get() == null || calificacion.get().trim().isEmpty()) {
+            return "S/C";
+        }
+        return calificacion.get();
+    }
+
     // VALIDACIÓN
     public boolean tieneCalificacionValida() {
         String val = getCalificacion();
