@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ExportadorCSV {
 
-    public static void generarReporte(List<Alumno> listaAlumnos, String rutaDestino) throws IOException {
+    public boolean generarReporte(List<Alumno> listaAlumnos, String rutaDestino) throws IOException {
         // Usamos try-with-resources para asegurar que se cierre el archivo
         try (PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(rutaDestino), StandardCharsets.UTF_8))) {
 
@@ -19,6 +19,10 @@ public class ExportadorCSV {
                 // Formato: Matricula,Materia,Nota
                 pw.println(alumno.getMatricula() + ",Disenio de Software," + alumno.getCalificacionFormateada());
             }
+
+            return true;
+        }catch (Exception e){
+            return false;
         }
     }
 }
