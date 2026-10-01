@@ -23,4 +23,5 @@ module org.cris.AdaDos {
     exports org.cris.AdaDos.models;
     exports org.cris.AdaDos.utils;
     exports org.cris.AdaDos.TareaTres;
+    exports org.cris.AdaDos.tareaUno;
 }

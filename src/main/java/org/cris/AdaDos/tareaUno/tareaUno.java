@@ -32,6 +32,12 @@ public class tareaUno {
         public String getMatricula() {
             return matricula;
         }
+        public Integer getCalificacion() {
+            return calificacion;
+        }
+        public void setCalificacion(Integer calificacion) {
+            this.calificacion = calificacion;
+        }
         public String getCalificacionFormateada() {
             if (calificacion == null) {
                 return "S/C";

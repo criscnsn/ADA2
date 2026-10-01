@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ExportadorCSV {
 
-    public boolean generarReporte(List<Alumno> listaAlumnos, String rutaDestino) throws IOException {
+    public static boolean generarReporte(List<Alumno> listaAlumnos, String rutaDestino) throws IOException {
         // Usamos try-with-resources para asegurar que se cierre el archivo
         try (PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(rutaDestino), StandardCharsets.UTF_8))) {
 
